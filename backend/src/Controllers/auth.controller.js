@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { User, AuditLog } from "../models/index.js";
 
+
 export async function register(req, res, next) {
   try {
     const { name, email, password, role } = req.body;
