@@ -1,0 +1,22 @@
+import { Router } from "express";
+import auth from "./auth.routes.js";
+import hotels from "./hotels.routes.js";
+import rooms from "./rooms.routes.js";
+import bookings from "./bookings.routes.js";
+import coupons from "./coupons.routes.js";
+import media from "./media.routes.js";
+import reports from "./reports.routes.js";
+import search from "./search.routes.js";
+import calendar from "./calendar.routes.js";
+
+const r = Router();
+r.use("/auth", auth);
+r.use("/hotels", hotels);
+r.use("/rooms", rooms);
+r.use("/bookings", bookings);
+r.use("/coupons", coupons);
+r.use("/media", media);
+r.use("/reports", reports);
+r.use("/search", search);
+r.use("/calendar", calendar);
+export default r;
