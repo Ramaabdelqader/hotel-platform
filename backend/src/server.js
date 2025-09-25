@@ -4,7 +4,8 @@ import app from "./app.js";
 import { connectDB } from "./config/db.js";
 import { syncModels, Booking } from "./models/index.js";
 import cron from "node-cron";
-import { subMinutes, formatISO } from "date-fns";
+import { subMinutes } from "date-fns";
+import { Op } from "sequelize";
 
 const PORT = process.env.PORT || 4000;
 
@@ -17,8 +18,8 @@ const PORT = process.env.PORT || 4000;
   cron.schedule("* * * * *", async () => {
     const cutoff = subMinutes(new Date(), minutes);
     await Booking.update(
-      { status: "EXPIRED" },
-      { where: { status: "PENDING", createdAt: { lte: formatISO(cutoff) } } }
+      { status: "CANCELLED" },
+      { where: { status: "PENDING", createdAt: { [Op.lte]: cutoff } } }
     );
   });
 

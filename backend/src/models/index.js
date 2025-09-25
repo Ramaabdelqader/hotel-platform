@@ -1,11 +1,11 @@
 import { sequelize } from "../config/db.js";
 import UserModel from "./user.js";
-import HotelModel from "./Hotel.js";
-import RoomModel from "./Room.js";
+import HotelModel from "./hotel.js";
+import RoomModel from "./room.js";
 import SeasonalPriceModel from "./SeasonalPrice.js";
-import BookingModel from "./Booking.js";
-import CouponModel from "./Coupon.js";
-import MediaModel from "./Media.js";
+import BookingModel from "./booking.js";
+import CouponModel from "./coupon.js";
+import MediaModel from "./media.js";
 import AuditLogModel from "./AuditLog.js";
 
 export const User = UserModel(sequelize);
@@ -33,7 +33,8 @@ Booking.belongsTo(Room, { foreignKey: "roomId" });
 Coupon.hasMany(Booking, { foreignKey: "couponId" });
 Booking.belongsTo(Coupon, { foreignKey: "couponId" });
 
-// Media is polymorphic via entityType + entityId (no FK)
+// Media polymorphic (entityType + entityId)
+
 export async function syncModels() {
-  await sequelize.sync({ alter: true }); // dev convenience
+  await sequelize.sync({ alter: true }); // استخدمي migrations لاحقًا للإنتاج
 }
