@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import { sequelize, } from "../config/db.js";
+import sequelize from "../config/db.js";
 import { Booking, Room, SeasonalPrice, Coupon } from "../models/index.js";
 import { rangesOverlap } from "../utils/availability.js";
 import { computeRoomPrice } from "../utils/pricing.js";
