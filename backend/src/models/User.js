@@ -1,26 +1,26 @@
+import sequelize from "../config/db.js";   // ✅ default
 import { DataTypes } from "sequelize";
-import sequelize from "../config/db.js";  
 
 const User = sequelize.define("User", {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true, // ✅ هنا نعمله unique مرة واحدة بس
+    unique: true
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   role: {
-    type: DataTypes.ENUM("VIEWER", "MANAGER", "ADMIN"),
-    defaultValue: "VIEWER",
-  },
-}, {
-  indexes: [], // ✅ ما تضيفش indexes زيادة
+    type: DataTypes.ENUM("CUSTOMER", "STAFF", "MANAGER", "ADMIN"),
+    allowNull: false,
+    defaultValue: "CUSTOMER"
+  }
 });
 
 export default User;

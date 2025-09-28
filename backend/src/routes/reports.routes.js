@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { authRequired } from "../middleware/auth.js";
 import { allowRoles } from "../middleware/roles.js";
-import { occupancy, revenue, topRooms } from "../Controllers/reports.controller.js";
+import { occupancy, revenue, topRooms } from "../controllers/reports.controller.js";
 
 const r = Router();
 r.get("/occupancy", authRequired, allowRoles("ADMIN","MANAGER"), occupancy);

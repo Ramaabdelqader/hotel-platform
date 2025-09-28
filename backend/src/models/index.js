@@ -1,37 +1,39 @@
-import sequelize from "../config/db.js";
-import UserModel from "./user.js";
-import HotelModel from "./hotel.js";
-import RoomModel from "./room.js";
-import BookingModel from "./booking.js";
-// لو عندك Media أو SeasonalPrice أو AuditLog ضيفهم هنا بنفس الطريقة
+import sequelize from "../config/db.js";   // ✅ default import
+import UserModel from "./User.js";
+import HotelModel from "./Hotel.js";
+import RoomModel from "./Room.js";
+import SeasonalPriceModel from "./SeasonalPrice.js";
+import BookingModel from "./Booking.js";
+import CouponModel from "./Coupon.js";
+import MediaModel from "./Media.js";
+import AuditLogModel from "./AuditLog.js";
 
-// ✅ عرّف الموديلات
-export const User = UserModel(sequelize);
+export const User = UserModel;
 export const Hotel = HotelModel(sequelize);
 export const Room = RoomModel(sequelize);
+export const SeasonalPrice = SeasonalPriceModel(sequelize);
 export const Booking = BookingModel(sequelize);
+export const Coupon = CouponModel(sequelize);
+export const Media = MediaModel(sequelize);
+export const AuditLog = AuditLogModel(sequelize);
 
-// ✅ العلاقات
-Hotel.hasMany(Room, { foreignKey: "hotelId" });
+// Associations
+Hotel.hasMany(Room, { foreignKey: "hotelId", onDelete: "CASCADE" });
 Room.belongsTo(Hotel, { foreignKey: "hotelId" });
 
-Room.hasMany(Booking, { foreignKey: "roomId" });
-Booking.belongsTo(Room, { foreignKey: "roomId" });
+Room.hasMany(SeasonalPrice, { foreignKey: "roomId", onDelete: "CASCADE" });
+SeasonalPrice.belongsTo(Room, { foreignKey: "roomId" });
 
 User.hasMany(Booking, { foreignKey: "userId" });
 Booking.belongsTo(User, { foreignKey: "userId" });
 
-// ✅ syncModels function
-export async function syncModels() {
-  await sequelize.sync({ alter: true }); // يستعمل alter عشان يحدث الجداول بدون drop
-  console.log("✅ All models synced successfully");
-}
+Room.hasMany(Booking, { foreignKey: "roomId" });
+Booking.belongsTo(Room, { foreignKey: "roomId" });
 
-// ✅ export default لو حبيت تستعمل كل الموديلات مره وحدة
-export default {
-  sequelize,
-  User,
-  Hotel,
-  Room,
-  Booking,
-};
+Coupon.hasMany(Booking, { foreignKey: "couponId" });
+Booking.belongsTo(Coupon, { foreignKey: "couponId" });
+
+// Media is polymorphic via entityType + entityId (no FK)
+export async function syncModels() {
+  await sequelize.sync({ alter: true }); // dev convenience
+}

@@ -3,17 +3,14 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { AuthProvider } from "./context/AuthProvider.jsx";
-import ConfirmProvider from "./components/ui/ConfirmProvider.jsx";
+import { ConfirmProvider } from "./components/ui/confirmProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
- <ConfirmProvider>
-    
-    <AuthProvider>
-    
-      <App />
-    </AuthProvider>
+    <ConfirmProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </ConfirmProvider>
   </React.StrictMode>
 );
-

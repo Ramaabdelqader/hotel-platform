@@ -1,39 +1,53 @@
+import express from "express";
+import helmet from "helmet";
+import cors from "cors";
 import dotenv from "dotenv";
-dotenv.config();
-import app from "./app.js";
-import sequelize from "./config/db.js";   // ✅ جاي من db.js
-import { syncModels, Booking } from "./models/index.js";
 import cron from "node-cron";
-import { subMinutes } from "date-fns";
-import { Op } from "sequelize";
+import { subMinutes, formatISO } from "date-fns";
+
+import { connectDB } from "./config/db.js";
+import { syncModels, Booking } from "./models/index.js";
+
+// 🔹 Import routes
+import publicAuthRoutes from "./routes/auth.public.routes.js";
+import cmsAuthRoutes from "./routes/auth.cms.routes.js";
+
+dotenv.config();
+
+const app = express();
+
+// ✅ Security middlewares
+app.use(helmet());
+app.use(
+  cors({
+    origin: true,       // in production, replace with an array of allowed URLs
+    credentials: true
+  })
+);
+
+// ✅ JSON body parser
+app.use(express.json());
+
+// ✅ Routes
+app.use("/api/auth", publicAuthRoutes);      // Customer frontend
+app.use("/api/cms/auth", cmsAuthRoutes);     // CMS frontend
 
 const PORT = process.env.PORT || 4000;
 
+// ✅ Database + Cron + Server start
 (async () => {
-  try {
-    // ✅ connect to DB
-    await sequelize.authenticate();
-    console.log("✅ DB connected");
+  await connectDB();
+  await syncModels();
 
-    // ✅ sync models
-    await syncModels();
-
-    // Auto-cancel unconfirmed bookings after UNCONFIRMED_CANCEL_MINUTES
-    const minutes = Number(process.env.UNCONFIRMED_CANCEL_MINUTES || 30);
-    cron.schedule("* * * * *", async () => {
-      const cutoff = subMinutes(new Date(), minutes);
-      await Booking.update(
-        { status: "CANCELLED" },
-        { where: { status: "PENDING", createdAt: { [Op.lte]: cutoff } } }
-      );
-    });
-
-    // Start server
-    app.listen(PORT, () =>
-      console.log(`🚀 API on http://localhost:${PORT}`)
+  // Auto-cancel unconfirmed bookings after X minutes
+  const minutes = Number(process.env.UNCONFIRMED_CANCEL_MINUTES || 30);
+  cron.schedule("* * * * *", async () => {
+    const cutoff = subMinutes(new Date(), minutes);
+    await Booking.update(
+      { status: "EXPIRED" },
+      { where: { status: "PENDING", createdAt: { lte: formatISO(cutoff) } } }
     );
-  } catch (err) {
-    console.error("❌ DB connection failed:", err);
-    process.exit(1);
-  }
+  });
+
+  app.listen(PORT, () => console.log(`🚀 API running on http://localhost:${PORT}`));
 })();

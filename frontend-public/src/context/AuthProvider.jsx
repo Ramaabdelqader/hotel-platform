@@ -12,6 +12,13 @@ export function AuthProvider({ children }) {
     setUser(me.data.data);
   }
 
+  async function register(name, email, password) {
+    const { data } = await api.post("/auth/register", { name, email, password });
+    localStorage.setItem("token", data.data.token);
+    const me = await api.get("/auth/me");
+    setUser(me.data.data);
+  }
+
   function logout() {
     localStorage.removeItem("token");
     setUser(null);
@@ -26,13 +33,14 @@ export function AuthProvider({ children }) {
           setUser(me.data.data);
         } catch {
           localStorage.removeItem("token");
+          setUser(null);
         }
       }
     })();
   }, []);
 
   return (
-    <AuthCtx.Provider value={{ user, login, logout }}>
+    <AuthCtx.Provider value={{ user, login, register, logout }}>
       {children}
     </AuthCtx.Provider>
   );

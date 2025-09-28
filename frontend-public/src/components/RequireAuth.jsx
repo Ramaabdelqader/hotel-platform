@@ -2,14 +2,14 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 export default function RequireAuth({ children, roles }) {
-  const { user } = useAuth(); // user من الـ JWT: { id, email, role }
+  const { user } = useAuth();
 
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
 
   if (roles && !roles.includes(user.role)) {
-    return <Navigate to="/login" />; // أو صفحة Forbidden
+    return <Navigate to="/forbidden" replace />; 
   }
 
   return children;

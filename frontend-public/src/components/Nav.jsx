@@ -1,22 +1,13 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-
-import { useConfirm } from "./ui/confirm-context";
-
-
+import { useAuth } from "../hooks/useAuth.jsx";
+import { useConfirm } from "./ui/confirm-context.js";
 
 export default function Nav() {
   const { user, logout } = useAuth();
   const confirm = useConfirm();
 
   async function handleLogout() {
-    const ok = await confirm({
-      title: "Logout",
-      message: "Are you sure you want to log out?",
-      confirmText: "Yes, Logout",
-      cancelText: "Cancel",
-      variant: "danger",
-    });
+    const ok = await confirm("Are you sure you want to log out?", "Logout");
     if (ok) logout();
   }
 

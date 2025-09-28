@@ -6,10 +6,11 @@ import HotelDetails from "./pages/HotelDetails";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Register from "./pages/register";
 import MyBookings from "./pages/MyBookings";
 import RequireAuth from "./components/RequireAuth";
 import NotFound from "./pages/NotFound";
+import Forbidden from "./pages/Forbidden";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               </RequireAuth>
             }
           />
+          <Route path="forbidden" element={<Forbidden />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

@@ -1,17 +1,25 @@
-// backend/src/config/db.js
+// src/config/db.js
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
-// ✅ عرفه مرة وحدة بس
+dotenv.config();
+
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
-  process.env.DB_PASS,
+  process.env.DB_PASSWORD,
   {
-    host: process.env.DB_HOST || "127.0.0.1",
-    dialect: "mysql",
-    logging: false,
+    host: process.env.DB_HOST,
+    dialect: "mysql"
   }
 );
 
-// ✅ اعمل export واحد بس
-export default sequelize;
+export default sequelize;   // ✅ default export
+export const connectDB = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("✅ DB connected");
+  } catch (error) {
+    console.error("❌ DB connection failed:", error);
+  }
+};
