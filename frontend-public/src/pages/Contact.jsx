@@ -5,7 +5,7 @@ export default function Contact() {
         {/* Heading */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-            Get in <span className="text-blue-600">Touch</span>
+            Get in <span className="text-myColor">Touch</span>
           </h1>
           <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
             Have questions or need help with your booking? Our team is here to
@@ -30,7 +30,7 @@ export default function Contact() {
                   <span className="font-semibold">Phone:</span>{" "}
                   <a
                     href="tel:+123456789"
-                    className="text-blue-600 hover:underline"
+                    className="text-myColor hover:underline"
                   >
                     +1 (234) 567-89
                   </a>
@@ -39,9 +39,9 @@ export default function Contact() {
                   <span className="font-semibold">Email:</span>{" "}
                   <a
                     href="mailto:support@hotelbooking.com"
-                    className="text-blue-600 hover:underline"
+                    className="text-myColor hover:underline"
                   >
-                    support@hotelbooking.com
+                    support@stayease.com
                   </a>
                 </li>
                 <li>
@@ -97,7 +97,7 @@ export default function Contact() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition"
+                className="w-full bg-myColor text-white font-semibold py-3 rounded-lg hover:bg-hoverColor transition"
               >
                 Send Message
               </button>

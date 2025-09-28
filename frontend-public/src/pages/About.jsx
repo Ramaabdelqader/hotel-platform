@@ -5,7 +5,7 @@ export default function About() {
         {/* Heading */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-            About <span className="text-blue-600">HotelBooking</span>
+            About <span className="text-myColor">StayEase</span>
           </h1>
           <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
             Your trusted platform for finding and booking the perfect stay,
@@ -19,9 +19,9 @@ export default function About() {
           {/* Image */}
           <div className="relative">
             <img
-              src="https://images.unsplash.com/photo-1501117716987-c8e1ecb2103d?auto=format&fit=crop&w=900&q=80"
+              src="/AboutImage.png"
               alt="Luxury hotel"
-              className="rounded-2xl shadow-lg object-cover w-full h-[400px]"
+              className="rounded-2xl shadow-lg object-cover w-full h-full"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent rounded-2xl" />
           </div>
@@ -66,7 +66,7 @@ export default function About() {
         <div className="mt-16 text-center">
           <a
             href="/hotels"
-            className="inline-block px-8 py-4 bg-blue-600 text-white font-semibold text-lg rounded-lg shadow-lg hover:bg-blue-700 transition"
+            className="inline-block px-8 py-4 bg-myColor text-white font-semibold text-lg rounded-lg shadow-lg hover:bg-hoverColor transition"
           >
             Explore Hotels
           </a>

@@ -89,7 +89,7 @@ export default function HotelDetails() {
             <RequireAuth>
               <button
                 onClick={() => book(r.id)}
-                className="mt-4 md:mt-0 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition"
+                className="mt-4 md:mt-0 bg-myColor hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition"
               >
                 Book Now
               </button>
