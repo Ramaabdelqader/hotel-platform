@@ -83,8 +83,8 @@ export default function Register() {
           disabled={loading}
           className={`w-full py-3 rounded-lg font-semibold text-white transition ${
             loading
-              ? "bg-blue-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
+              ? "bg-myColor cursor-not-allowed"
+              : "bg-myColor hover:bg-hoverColor"
           }`}
         >
           {loading ? "Registering..." : "Register"}
@@ -92,7 +92,7 @@ export default function Register() {
 
         <p className="text-sm text-gray-600 mt-6 text-center">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-600 hover:underline">
+          <Link to="/login" className="text-myColor hover:underline">
             Login
           </Link>
         </p>

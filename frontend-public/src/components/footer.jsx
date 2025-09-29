@@ -7,7 +7,7 @@ export default function Footer() {
         
         {/* Left - Branding */}
         <div>
-          <h2 className="text-lg font-semibold">StayEase</h2>
+          <h2 className="text-lg font-semibold"><a href="/">StayEase</a></h2>
           <p className="text-sm text-gray-400 mt-2">
             &copy; {new Date().getFullYear()} All rights reserved.
           </p>
@@ -15,10 +15,10 @@ export default function Footer() {
 
         {/* Middle - Navigation */}
         <div className="flex flex-col gap-2">
-          <Link to="/about" className="hover:text-white transition">About Us</Link>
-          <Link to="/contact" className="hover:text-white transition">Contact Us</Link>
-          <Link to="/hotels" className="hover:text-white transition">Hotels</Link>
-          <Link to="/privacy" className="hover:text-white transition">Privacy Policy</Link>
+          <Link to="/about" className="hover:underline">About Us</Link>
+          <Link to="/contact" className="hover:underline">Contact Us</Link>
+          <Link to="/hotels" className="hover:underline">Hotels</Link>
+          <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
         </div>
 
         {/* Right - Socials */}

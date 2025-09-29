@@ -35,9 +35,6 @@ export default function Nav() {
         {user && (
           <>
             <Link to="/my-bookings" className="hover:text-white transition">My Bookings</Link>
-            {user.role !== "VIEWER" && (
-              <Link to="/cms" className="hover:text-white transition">CMS</Link>
-            )}
             <button
               onClick={handleLogout}
               className="ml-4 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"

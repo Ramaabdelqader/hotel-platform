@@ -1,0 +1,16 @@
+{
+  "users": [
+    { "id": 1, "email": "admin@example.com", "password": "pass123", "role": "ADMIN" },
+    { "id": 2, "email": "manager@example.com", "password": "pass123", "role": "MANAGER" },
+    { "id": 3, "email": "user@example.com", "password": "pass123", "role": "USER" }
+  ],
+  "hotels": [
+    { "id": 1, "name": "Grand Palace Hotel", "city": "Amman", "description": "Luxury 5-star hotel" },
+    { "id": 2, "name": "Cozy Inn", "city": "Irbid", "description": "Affordable and comfy stay" }
+  ],
+  "rooms": [
+    { "id": 1, "hotelId": 1, "type": "Deluxe Suite", "capacity": 2, "basePrice": 150 },
+    { "id": 2, "hotelId": 2, "type": "Standard Room", "capacity": 2, "basePrice": 60 }
+  ],
+  "bookings": []
+}
